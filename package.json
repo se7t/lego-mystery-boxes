@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/changa-one": "^4.5.9",
+    "@fontsource/exo-2": "^4.5.11",
     "@next/font": "13.1.6",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
