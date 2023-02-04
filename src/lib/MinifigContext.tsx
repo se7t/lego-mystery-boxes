@@ -21,8 +21,8 @@ export const MinifigContext = createContext<MinifigContextType>({
 });
 
 export const MinifigProvider = (props: { children: ReactNode }) => {
-  const rebrickableEndpoint =
-    "https://rebrickable.com/api/v3/lego/minifigs/?key=88a0f80017c36b6e6bc40c39b751ce53&in_theme_id=246";
+  const rebrickableThemeID = 246;
+  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}&in_theme_id=${rebrickableThemeID}`;
 
   const [minifigs, setMinifigs] = useState<Minifig[]>([]);
 
