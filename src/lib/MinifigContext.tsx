@@ -26,7 +26,7 @@ export const MinifigProvider = (props: { children: ReactNode }) => {
 
   const [minifigs, setMinifigs] = useState<Minifig[]>([]);
 
-  const getMinifigs = () => {
+  const getMinifigs = async () => {
     let pageNumber = 1;
     const fetchMinifigs = () => {
       axios
