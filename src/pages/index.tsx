@@ -1,8 +1,11 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
-import Link from "next/link";
+import { useContext } from "react";
+import { MinifigContext } from "@/lib/MinifigContext";
+import Button from "@/components/Button";
 
 export default function Home() {
+  const { getMinifigs } = useContext(MinifigContext);
+
   return (
     <>
       <Head>
@@ -19,12 +22,9 @@ export default function Home() {
           Lego Minifig Mystery Box
         </h1>
 
-        <Link
-          href="/"
-          className="active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700"
-        >
+        <Button href="/" onClickAction={getMinifigs}>
           Let{"'"}s Go!
-        </Link>
+        </Button>
       </div>
     </>
   );
