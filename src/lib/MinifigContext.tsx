@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState, useEffect } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 export interface Minifig {
   set_num: string;
@@ -35,6 +36,8 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
   const [randomMinifigs, setRandomMinifigs] = useState<Minifig[]>([]);
   const [chosenMinifig, setChosenMinifig] = useState<Minifig>({} as Minifig);
 
+  const router = useRouter();
+
   useEffect(() => {
     if (minifigs.length > 0) {
       const randomThree = minifigs.sort(() => 0.5 - Math.random()).slice(0, 3);
@@ -57,6 +60,8 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
 
     await fetchMinifigs();
     setMinifigs(allMinifigs);
+
+    router.push("/cards");
   };
 
   const chooseMinifig = (minifig: Minifig) => {

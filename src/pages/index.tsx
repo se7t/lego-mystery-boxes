@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useContext } from "react";
 import { MinifigContext } from "@/lib/MinifigContext";
-import Button from "@/components/Button";
 
 export default function Home() {
   const { getMinifigs } = useContext(MinifigContext);
@@ -22,9 +21,12 @@ export default function Home() {
           Lego Minifig Mystery Box
         </h1>
 
-        <Button href="/cards" onClickAction={getMinifigs}>
+        <a
+          onClick={getMinifigs}
+          className="px-25 font-sans cursor-pointer rounded-full bg-blue-500 px-24 py-3 text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700"
+        >
           Let{"'"}s Go!
-        </Button>
+        </a>
       </div>
     </>
   );
