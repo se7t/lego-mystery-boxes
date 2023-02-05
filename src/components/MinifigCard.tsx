@@ -7,9 +7,9 @@ function MinifigCard({ imageUrl, name, setUrl }) {
       <Image
         src={imageUrl}
         alt={name + " " + "Image"}
-        width={128}
-        height={128}
-        className="block max-h-32"
+        width={256}
+        height={256}
+        className="block h-32 w-auto md:h-64"
       />
 
       <h2 className="text-center font-bold">{name}</h2>
