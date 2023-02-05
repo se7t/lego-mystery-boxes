@@ -16,6 +16,7 @@ interface MinifigContextType {
   chosenMinifig: Minifig;
   chooseMinifig: (minifig: Minifig) => void;
   getMinifigs: () => void;
+  resetStates: () => void;
 }
 
 const MinifigContext = createContext<MinifigContextType>({
@@ -24,6 +25,7 @@ const MinifigContext = createContext<MinifigContextType>({
   chosenMinifig: {} as Minifig,
   chooseMinifig: () => {},
   getMinifigs: () => {},
+  resetStates: () => {},
 });
 
 const MinifigProvider = ({ children }: { children: ReactNode }) => {
@@ -61,6 +63,12 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
     setChosenMinifig(minifig);
   };
 
+  const resetStates = () => {
+    setMinifigs([]);
+    setRandomMinifigs([]);
+    setChosenMinifig({} as Minifig);
+  };
+
   return (
     <MinifigContext.Provider
       value={{
@@ -69,6 +77,7 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
         chosenMinifig,
         chooseMinifig,
         getMinifigs,
+        resetStates,
       }}
     >
       {children}

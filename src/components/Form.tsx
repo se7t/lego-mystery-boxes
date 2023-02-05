@@ -20,7 +20,7 @@ type FormValues = {
 };
 
 const Form = () => {
-  const { chosenMinifig } = useContext(MinifigContext);
+  const { chosenMinifig, resetStates } = useContext(MinifigContext);
   const router = useRouter();
 
   const {
@@ -45,6 +45,7 @@ const Form = () => {
       .then((res) => {
         console.log(res);
         router.push("/");
+        resetStates();
       })
       .catch((res) => {
         console.error(res);
