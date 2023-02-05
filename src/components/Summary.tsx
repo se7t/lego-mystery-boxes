@@ -17,7 +17,7 @@ interface ChosenMinifigParts {
 }
 
 export const Summary = () => {
-  const { chosenMinifigId } = useContext(MinifigContext);
+  const { chosenMinifig } = useContext(MinifigContext);
 
   const [chosenMinifigParts, setChosenMinifigParts] =
     useState<ChosenMinifigParts>({
@@ -33,7 +33,7 @@ export const Summary = () => {
       count: 0,
     });
 
-  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/${chosenMinifigId}/parts?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}`;
+  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/${chosenMinifig.set_num}/parts?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}`;
 
   useEffect(() => {
     axios

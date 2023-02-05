@@ -6,7 +6,7 @@ import Head from "next/head";
 import { MinifigsNotLoaded } from "@/components/MinifigsNotLoaded";
 
 export default function Home() {
-  const { chosenMinifigId } = useContext(MinifigContext);
+  const { chosenMinifig } = useContext(MinifigContext);
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto flex  items-center justify-center gap-8 px-8">
-        {chosenMinifigId.length === 0 ? (
+        {chosenMinifig.set_num.length === 0 ? (
           <MinifigsNotLoaded />
         ) : (
           <div className="flex flex-wrap gap-32">

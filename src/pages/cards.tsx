@@ -6,7 +6,7 @@ import MinifigCard from "@/components/MinifigCard";
 import { MinifigsNotLoaded } from "@/components/MinifigsNotLoaded";
 
 const Home = () => {
-  const { minifigs, chosenMinifigId, randomMinifigs } =
+  const { minifigs, chosenMinifig, randomMinifigs } =
     useContext(MinifigContext);
 
   return (
@@ -37,7 +37,7 @@ const Home = () => {
                       imageUrl={minifig.set_img_url}
                       name={minifig.name}
                       setUrl={minifig.set_url}
-                      setId={minifig.set_num}
+                      minifig={minifig}
                       index={index + 1}
                     />
                   ))}
@@ -45,7 +45,7 @@ const Home = () => {
                 <Link
                   href="/shipment"
                   className={`active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-center text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700 ${
-                    !chosenMinifigId
+                    !chosenMinifig.set_num
                       ? "pointer-events-none opacity-75 saturate-0 "
                       : ""
                   }`}
