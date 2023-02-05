@@ -18,35 +18,24 @@ interface MinifigContextType {
   getMinifigs: () => void;
 }
 
-export const MinifigContext = createContext<MinifigContextType>({
+const MinifigContext = createContext<MinifigContextType>({
   minifigs: [],
   randomMinifigs: [],
   chosenMinifigId: undefined,
-  chooseMinifig: (minifig: string) => {},
+  chooseMinifig: () => {},
   getMinifigs: () => {},
 });
 
-export const MinifigProvider = (props: { children: ReactNode }) => {
-  const rebrickableThemeID = 246;
-  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}&in_theme_id=${rebrickableThemeID}`;
+const MinifigProvider = ({ children }: { children: ReactNode }) => {
+  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}&in_theme_id=246`;
 
   const [minifigs, setMinifigs] = useState<Minifig[]>([]);
-
   const [randomMinifigs, setRandomMinifigs] = useState<Minifig[]>([]);
-
   const [chosenMinifigId, setChosenMinifigId] = useState("");
 
   useEffect(() => {
-    // Select three random minifigs from the `minifigs` state and set it to `randomMinifigs`
     if (minifigs.length > 0) {
-      let randomThree: Minifig[] = [];
-      while (randomThree.length < 3) {
-        const randomIndex = Math.floor(Math.random() * minifigs.length);
-        if (!randomThree.includes(minifigs[randomIndex])) {
-          randomThree.push(minifigs[randomIndex]);
-        }
-        console.log(randomThree);
-      }
+      const randomThree = minifigs.sort(() => 0.5 - Math.random()).slice(0, 3);
       setRandomMinifigs(randomThree);
     }
   }, [minifigs]);
@@ -77,12 +66,14 @@ export const MinifigProvider = (props: { children: ReactNode }) => {
       value={{
         minifigs,
         randomMinifigs,
-        chosenMinifigId: chosenMinifigId,
+        chosenMinifigId,
         chooseMinifig,
         getMinifigs,
       }}
     >
-      {props.children}
+      {children}
     </MinifigContext.Provider>
   );
 };
+
+export { MinifigContext, MinifigProvider };
