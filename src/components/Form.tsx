@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { validationRegExp } from "@/lib/validationRegExp";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { MinifigContext } from "@/lib/MinifigContext";
 
 type FormValues = {
@@ -23,13 +23,14 @@ const Form = () => {
 
   const {
     register,
-    formState: { errors },
+    formState: { errors, isValid },
     handleSubmit,
   } = useForm<FormValues>({
     defaultValues: {
       setName: chosenMinifig.name,
       setId: chosenMinifig.set_num,
     },
+    mode: "all",
   });
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
@@ -267,7 +268,9 @@ const Form = () => {
         <input {...register("setId")} className="hidden" />
         <input
           type="submit"
-          className={`active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-center text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700`}
+          className={`active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-center text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700 ${
+            !isValid && "pointer-events-none opacity-75 saturate-0"
+          }`}
         />
       </form>
     </div>
