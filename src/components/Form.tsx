@@ -1,6 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { validationRegExp } from "@/lib/validationRegExp";
 import axios from "axios";
+import { useContext } from "react";
+import { MinifigContext } from "@/lib/MinifigContext";
 
 type FormValues = {
   firstName: string;
@@ -17,14 +19,16 @@ type FormValues = {
 };
 
 const Form = () => {
+  const { chosenMinifig } = useContext(MinifigContext);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<FormValues>({
     defaultValues: {
-      setName: "test set name",
-      setId: "test set id",
+      setName: chosenMinifig.name,
+      setId: chosenMinifig.set_num,
     },
   });
 
