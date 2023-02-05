@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState, useEffect } from "react";
 import axios from "axios";
 
 interface Minifig {
@@ -12,11 +12,13 @@ interface Minifig {
 
 interface MinifigContextType {
   minifigs: Minifig[];
+  randomMinifigs: Minifig[];
   getMinifigs: () => void;
 }
 
 export const MinifigContext = createContext<MinifigContextType>({
   minifigs: [],
+  randomMinifigs: [],
   getMinifigs: () => {},
 });
 
@@ -26,25 +28,42 @@ export const MinifigProvider = (props: { children: ReactNode }) => {
 
   const [minifigs, setMinifigs] = useState<Minifig[]>([]);
 
+  const [randomMinifigs, setRandomMinifigs] = useState<Minifig[]>([]);
+
+  useEffect(() => {
+    // Select three random minifigs from the `minifigs` state and set it to `randomMinifigs`
+    if (minifigs.length > 0) {
+      let randomThree: Minifig[] = [];
+      while (randomThree.length < 3) {
+        const randomIndex = Math.floor(Math.random() * minifigs.length);
+        if (!randomThree.includes(minifigs[randomIndex])) {
+          randomThree.push(minifigs[randomIndex]);
+        }
+        console.log(randomThree);
+      }
+      setRandomMinifigs(randomThree);
+    }
+  }, [minifigs]);
+
   const getMinifigs = async () => {
     let pageNumber = 1;
-    const fetchMinifigs = () => {
-      axios
-        .get(`${rebrickableEndpoint}&page=${pageNumber}`)
-        .then((res) => {
-          setMinifigs((prevMinifigs) => prevMinifigs.concat(res.data.results));
-          if (res.data.next) {
-            pageNumber += 1;
-            fetchMinifigs();
-          }
-        })
-        .catch((err) => console.log(err));
+    let allMinifigs: Minifig[] = [];
+
+    const fetchMinifigs = async () => {
+      const res = await axios.get(`${rebrickableEndpoint}&page=${pageNumber}`);
+      allMinifigs = allMinifigs.concat(res.data.results);
+      if (res.data.next) {
+        pageNumber += 1;
+        await fetchMinifigs();
+      }
     };
-    fetchMinifigs();
+
+    await fetchMinifigs();
+    setMinifigs(allMinifigs);
   };
 
   return (
-    <MinifigContext.Provider value={{ minifigs, getMinifigs }}>
+    <MinifigContext.Provider value={{ minifigs, randomMinifigs, getMinifigs }}>
       {props.children}
     </MinifigContext.Provider>
   );

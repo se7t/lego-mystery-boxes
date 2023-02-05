@@ -10,7 +10,7 @@ interface ButtonProps {
 function Button({ children, href, onClickAction }: ButtonProps) {
   const router = useRouter();
 
-  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+  const handleClick = async (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     onClickAction();
     router.push(href);

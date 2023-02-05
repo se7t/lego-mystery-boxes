@@ -22,7 +22,7 @@ export default function Home() {
           Lego Minifig Mystery Box
         </h1>
 
-        <Button href="/" onClickAction={getMinifigs}>
+        <Button href="/cards" onClickAction={getMinifigs}>
           Let{"'"}s Go!
         </Button>
       </div>
