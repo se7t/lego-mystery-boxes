@@ -53,18 +53,13 @@ export const Summary = () => {
         Summary
       </h2>
       <Image
-        src={"https://cdn.rebrickable.com/media/sets/fig-000029/60572.jpg"}
+        src={chosenMinifig.set_img_url}
         width={200}
         height={200}
-        alt={
-          "Harry Potter, Open Dark Blue Jacket over White Shirt, Dark Bluish Gray Legs"
-        }
+        alt={`${chosenMinifig.name} Image`}
         className="self-center"
       />
-      <h3 className="text-center font-bold">
-        Harry Potter, Open Dark Blue Jacket over White Shirt, Dark Bluish Gray
-        Legs
-      </h3>
+      <h3 className="text-center font-bold">{chosenMinifig.name}</h3>
       <p className="font-bold">
         There are {chosenMinifigParts.count} parts in this minifig:
       </p>
