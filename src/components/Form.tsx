@@ -50,7 +50,7 @@ const Form = () => {
   return (
     <div className="flex-shrink flex-grow flex-col">
       <h1 className="text-bold mb-12 font-display text-5xl uppercase text-white sm:text-6xl">
-        Order
+        Shipping Details
       </h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
