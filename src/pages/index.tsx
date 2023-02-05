@@ -17,12 +17,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container mx-auto flex h-screen flex-col items-center justify-center gap-8">
+      <div className="container mx-auto flex flex-col items-center justify-center gap-8">
         <h1 className="text-bold text-center font-display text-5xl uppercase text-white sm:text-6xl">
           Lego Minifig Mystery Box
         </h1>
 
-        <Button href="/" onClickAction={getMinifigs}>
+        <Button href="/cards" onClickAction={getMinifigs}>
           Let{"'"}s Go!
         </Button>
       </div>

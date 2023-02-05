@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="bg-slate-900">
+      <body className="flex min-h-screen items-center justify-center bg-slate-900 py-16">
         <Main />
         <NextScript />
       </body>

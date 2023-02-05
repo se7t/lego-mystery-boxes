@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState, useEffect } from "react";
 import axios from "axios";
 
 interface Minifig {
@@ -12,40 +12,68 @@ interface Minifig {
 
 interface MinifigContextType {
   minifigs: Minifig[];
+  randomMinifigs: Minifig[];
+  chosenMinifigId: string | undefined;
+  chooseMinifig: (minifig: string) => void;
   getMinifigs: () => void;
 }
 
-export const MinifigContext = createContext<MinifigContextType>({
+const MinifigContext = createContext<MinifigContextType>({
   minifigs: [],
+  randomMinifigs: [],
+  chosenMinifigId: undefined,
+  chooseMinifig: () => {},
   getMinifigs: () => {},
 });
 
-export const MinifigProvider = (props: { children: ReactNode }) => {
-  const rebrickableThemeID = 246;
-  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}&in_theme_id=${rebrickableThemeID}`;
+const MinifigProvider = ({ children }: { children: ReactNode }) => {
+  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}&in_theme_id=246`;
 
   const [minifigs, setMinifigs] = useState<Minifig[]>([]);
+  const [randomMinifigs, setRandomMinifigs] = useState<Minifig[]>([]);
+  const [chosenMinifigId, setChosenMinifigId] = useState("");
+
+  useEffect(() => {
+    if (minifigs.length > 0) {
+      const randomThree = minifigs.sort(() => 0.5 - Math.random()).slice(0, 3);
+      setRandomMinifigs(randomThree);
+    }
+  }, [minifigs]);
 
   const getMinifigs = async () => {
     let pageNumber = 1;
-    const fetchMinifigs = () => {
-      axios
-        .get(`${rebrickableEndpoint}&page=${pageNumber}`)
-        .then((res) => {
-          setMinifigs((prevMinifigs) => prevMinifigs.concat(res.data.results));
-          if (res.data.next) {
-            pageNumber += 1;
-            fetchMinifigs();
-          }
-        })
-        .catch((err) => console.log(err));
+    let allMinifigs: Minifig[] = [];
+
+    const fetchMinifigs = async () => {
+      const res = await axios.get(`${rebrickableEndpoint}&page=${pageNumber}`);
+      allMinifigs = allMinifigs.concat(res.data.results);
+      if (res.data.next) {
+        pageNumber += 1;
+        await fetchMinifigs();
+      }
     };
-    fetchMinifigs();
+
+    await fetchMinifigs();
+    setMinifigs(allMinifigs);
+  };
+
+  const chooseMinifig = (minifig: string) => {
+    setChosenMinifigId(minifig);
   };
 
   return (
-    <MinifigContext.Provider value={{ minifigs, getMinifigs }}>
-      {props.children}
+    <MinifigContext.Provider
+      value={{
+        minifigs,
+        randomMinifigs,
+        chosenMinifigId,
+        chooseMinifig,
+        getMinifigs,
+      }}
+    >
+      {children}
     </MinifigContext.Provider>
   );
 };
+
+export { MinifigContext, MinifigProvider };
