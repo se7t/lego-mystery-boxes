@@ -40,7 +40,12 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (minifigs.length > 0) {
-      const randomThree = minifigs.sort(() => 0.5 - Math.random()).slice(0, 3);
+      const randomThree = minifigs
+        .filter(
+          (minifig) => minifig.set_num && minifig.name && minifig.set_img_url
+        )
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3);
       setRandomMinifigs(randomThree);
     }
   }, [minifigs]);
