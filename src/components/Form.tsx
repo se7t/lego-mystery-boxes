@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { validationRegExp } from "@/lib/validationRegExp";
+import axios from "axios";
 
 type FormValues = {
   firstName: string;
@@ -27,7 +28,20 @@ const Form = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    axios({
+      method: "post",
+      url: "http://httpbin.org/post",
+      data: data,
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((res) => {
+        console.error(res);
+      });
+  };
 
   return (
     <div className="flex-shrink flex-grow flex-col">
