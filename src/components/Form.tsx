@@ -1,19 +1,33 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { validationRegExp } from "@/lib/validationRegExp";
+
+type FormValues = {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  email: string;
+  birthDate: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  setName: string;
+  setId: string;
+};
 
 const Form = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormValues>({
     defaultValues: {
       setName: "test set name",
-      setId: "test set ID",
+      setId: "test set id",
     },
   });
 
-  const onSubmit = (data: any) => console.log(data);
+  const onSubmit: SubmitHandler<FormValues> = (data) => console.log(data);
 
   return (
     <div className="flex-shrink flex-grow flex-col">
