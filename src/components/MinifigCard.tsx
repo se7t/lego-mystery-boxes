@@ -1,7 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 
-function MinifigCard({ imageUrl, name, setUrl }) {
+interface MinifigCardType {
+  imageUrl: string;
+  name: string;
+  setUrl: string;
+}
+
+function MinifigCard({ imageUrl, name, setUrl }: MinifigCardType) {
   return (
     <div className="flex flex-col items-center justify-between gap-8 rounded-lg bg-gray-50 p-8 shadow-2xl">
       <Image
