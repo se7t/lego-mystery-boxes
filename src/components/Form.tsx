@@ -1,8 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { validationRegExp } from "@/lib/validationRegExp";
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { MinifigContext } from "@/lib/MinifigContext";
+import { useRouter } from "next/router";
 
 type FormValues = {
   firstName: string;
@@ -20,6 +21,7 @@ type FormValues = {
 
 const Form = () => {
   const { chosenMinifig } = useContext(MinifigContext);
+  const router = useRouter();
 
   const {
     register,
@@ -42,6 +44,7 @@ const Form = () => {
     })
       .then((res) => {
         console.log(res);
+        router.push("/");
       })
       .catch((res) => {
         console.error(res);
