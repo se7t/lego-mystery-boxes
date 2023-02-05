@@ -13,7 +13,7 @@ interface Minifig {
 interface MinifigContextType {
   minifigs: Minifig[];
   randomMinifigs: Minifig[];
-  chosenMinifigId: string | undefined;
+  chosenMinifigId: string;
   chooseMinifig: (minifig: string) => void;
   getMinifigs: () => void;
 }
@@ -21,7 +21,7 @@ interface MinifigContextType {
 const MinifigContext = createContext<MinifigContextType>({
   minifigs: [],
   randomMinifigs: [],
-  chosenMinifigId: undefined,
+  chosenMinifigId: "",
   chooseMinifig: () => {},
   getMinifigs: () => {},
 });
