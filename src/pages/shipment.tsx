@@ -19,9 +19,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="container mx-auto flex  items-center justify-center gap-8 px-8">
+      <div className="container mx-auto flex items-center justify-center gap-8 px-8 ">
         {chosenMinifig.set_num ? (
-          <div className="flex flex-wrap gap-32">
+          <div className="flex flex-col-reverse flex-wrap gap-32 xl:flex-row">
             <Form />
             <Summary />
           </div>

@@ -158,7 +158,7 @@ const Form = () => {
             Date of Birth
           </label>
           <input
-            placeholder="24/01/1990"
+            placeholder="24/12/1997"
             {...register("birthDate", {
               required: "This field is required.",
               pattern: {
@@ -270,12 +270,14 @@ const Form = () => {
         </div>
         <input {...register("setName")} className="hidden" />
         <input {...register("setId")} className="hidden" />
-        <input
+        <button
           type="submit"
           className={`active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-center text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700 ${
             !isValid && "pointer-events-none opacity-75 saturate-0"
           }`}
-        />
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
