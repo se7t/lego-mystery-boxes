@@ -1,6 +1,27 @@
 import Image from "next/image";
+import { useContext, useEffect, useState } from "react";
+import { MinifigContext } from "@/lib/MinifigContext";
+import axios from "axios";
 
 export const Summary = () => {
+  const { chosenMinifigId } = useContext(MinifigContext);
+
+  const [chosenMinifigParts, setChosenMinifigParts] = useState({});
+
+  const rebrickableEndpoint = `https://rebrickable.com/api/v3/lego/minifigs/${chosenMinifigId}/parts?key=${process.env.NEXT_PUBLIC_REBRICKABLE_API_KEY}`;
+
+  useEffect(() => {
+    axios
+      .get(`${rebrickableEndpoint}`)
+      .then((res) => {
+        console.log(res.data);
+        setChosenMinifigParts(res.data);
+      })
+      .catch((res) => {
+        console.error(res.data);
+      });
+  }, [rebrickableEndpoint]);
+
   return (
     <div className="flex flex-shrink flex-grow-0 basis-96 flex-col gap-8 rounded-xl bg-white p-8">
       <h2 className="text-bold font-display text-3xl uppercase text-black sm:text-4xl">
