@@ -20,13 +20,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container mx-auto flex  items-center justify-center gap-8 px-8">
-        {chosenMinifig.set_num.length === 0 ? (
-          <MinifigsNotLoaded />
-        ) : (
+        {chosenMinifig.set_num ? (
           <div className="flex flex-wrap gap-32">
             <Form />
             <Summary />
           </div>
+        ) : (
+          <MinifigsNotLoaded />
         )}
       </div>
     </>
