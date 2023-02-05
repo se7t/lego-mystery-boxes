@@ -1,15 +1,23 @@
+import { MinifigContext } from "@/lib/MinifigContext";
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
 
 interface MinifigCardType {
   imageUrl: string;
   name: string;
   setUrl: string;
+  setId: string;
 }
 
-function MinifigCard({ imageUrl, name, setUrl }: MinifigCardType) {
+function MinifigCard({ imageUrl, name, setUrl, setId }: MinifigCardType) {
+  const { chooseMinifig } = useContext(MinifigContext);
+
   return (
-    <div className="flex flex-col items-center justify-between gap-8 rounded-lg bg-gray-50 p-8 shadow-2xl">
+    <div
+      className="flex flex-col items-center justify-between gap-8 rounded-lg bg-gray-50 p-8 shadow-2xl"
+      onClick={() => chooseMinifig(setId)}
+    >
       <Image
         src={imageUrl}
         alt={name + " " + "Image"}

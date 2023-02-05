@@ -48,6 +48,7 @@ export default function Home() {
                   imageUrl={minifig.set_img_url}
                   name={minifig.name}
                   setUrl={minifig.set_url}
+                  setId={minifig.set_num}
                 />
               ))}
             </div>

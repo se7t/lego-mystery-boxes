@@ -13,12 +13,16 @@ interface Minifig {
 interface MinifigContextType {
   minifigs: Minifig[];
   randomMinifigs: Minifig[];
+  chosenMinifig: string | undefined;
+  chooseMinifig: () => void;
   getMinifigs: () => void;
 }
 
 export const MinifigContext = createContext<MinifigContextType>({
   minifigs: [],
   randomMinifigs: [],
+  chosenMinifig: undefined,
+  chooseMinifig: () => {},
   getMinifigs: () => {},
 });
 
@@ -29,6 +33,8 @@ export const MinifigProvider = (props: { children: ReactNode }) => {
   const [minifigs, setMinifigs] = useState<Minifig[]>([]);
 
   const [randomMinifigs, setRandomMinifigs] = useState<Minifig[]>([]);
+
+  const [chosenMinifig, setChosenMinifig] = useState("");
 
   useEffect(() => {
     // Select three random minifigs from the `minifigs` state and set it to `randomMinifigs`
@@ -62,8 +68,20 @@ export const MinifigProvider = (props: { children: ReactNode }) => {
     setMinifigs(allMinifigs);
   };
 
+  const chooseMinifig = (minifigId: string) => {
+    setChosenMinifig(minifigId);
+  };
+
   return (
-    <MinifigContext.Provider value={{ minifigs, randomMinifigs, getMinifigs }}>
+    <MinifigContext.Provider
+      value={{
+        minifigs,
+        randomMinifigs,
+        chosenMinifig,
+        chooseMinifig,
+        getMinifigs,
+      }}
+    >
       {props.children}
     </MinifigContext.Provider>
   );
