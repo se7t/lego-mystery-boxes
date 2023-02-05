@@ -53,7 +53,7 @@ const Home = () => {
                 </div>
                 <Link
                   href="/shipment"
-                  className={`active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700 ${
+                  className={`active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-center text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700 ${
                     !chosenMinifigId
                       ? "pointer-events-none opacity-75 saturate-0 "
                       : ""
