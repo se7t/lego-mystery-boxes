@@ -11,11 +11,13 @@ interface MinifigCardType {
 }
 
 function MinifigCard({ imageUrl, name, setUrl, setId }: MinifigCardType) {
-  const { chooseMinifig } = useContext(MinifigContext);
+  const { chosenMinifigId, chooseMinifig } = useContext(MinifigContext);
 
   return (
     <div
-      className="flex flex-col items-center justify-between gap-8 rounded-lg bg-gray-50 p-8 shadow-2xl"
+      className={`flex flex-col items-center justify-between gap-8 rounded-lg bg-gray-50 p-8 shadow-lg transition-shadow ${
+        setId === chosenMinifigId ? "shadow-lg shadow-amber-400" : ""
+      }`}
       onClick={() => chooseMinifig(setId)}
     >
       <Image
