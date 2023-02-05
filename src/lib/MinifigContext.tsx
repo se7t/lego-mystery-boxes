@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useState, useEffect } from "react";
 import axios from "axios";
 
-interface Minifig {
+export interface Minifig {
   set_num: string;
   name: string;
   num_parts: number;
@@ -13,17 +13,19 @@ interface Minifig {
 interface MinifigContextType {
   minifigs: Minifig[];
   randomMinifigs: Minifig[];
-  chosenMinifigId: string | undefined;
-  chooseMinifig: (minifig: string) => void;
+  chosenMinifig: Minifig;
+  chooseMinifig: (minifig: Minifig) => void;
   getMinifigs: () => void;
+  resetStates: () => void;
 }
 
 const MinifigContext = createContext<MinifigContextType>({
   minifigs: [],
   randomMinifigs: [],
-  chosenMinifigId: undefined,
+  chosenMinifig: {} as Minifig,
   chooseMinifig: () => {},
   getMinifigs: () => {},
+  resetStates: () => {},
 });
 
 const MinifigProvider = ({ children }: { children: ReactNode }) => {
@@ -31,7 +33,7 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
 
   const [minifigs, setMinifigs] = useState<Minifig[]>([]);
   const [randomMinifigs, setRandomMinifigs] = useState<Minifig[]>([]);
-  const [chosenMinifigId, setChosenMinifigId] = useState("");
+  const [chosenMinifig, setChosenMinifig] = useState<Minifig>({} as Minifig);
 
   useEffect(() => {
     if (minifigs.length > 0) {
@@ -57,8 +59,14 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
     setMinifigs(allMinifigs);
   };
 
-  const chooseMinifig = (minifig: string) => {
-    setChosenMinifigId(minifig);
+  const chooseMinifig = (minifig: Minifig) => {
+    setChosenMinifig(minifig);
+  };
+
+  const resetStates = () => {
+    setMinifigs([]);
+    setRandomMinifigs([]);
+    setChosenMinifig({} as Minifig);
   };
 
   return (
@@ -66,9 +74,10 @@ const MinifigProvider = ({ children }: { children: ReactNode }) => {
       value={{
         minifigs,
         randomMinifigs,
-        chosenMinifigId,
+        chosenMinifig,
         chooseMinifig,
         getMinifigs,
+        resetStates,
       }}
     >
       {children}
