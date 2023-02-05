@@ -50,10 +50,10 @@ const Home = () => {
                   ))}
                 </div>
                 <Link
-                  href="/order"
+                  href="/shipment"
                   className="active:px-25 font-sans rounded-full bg-blue-500 px-24 py-3 text-lg font-bold uppercase text-white drop-shadow-lg transition-all hover:bg-blue-600 focus:bg-blue-700 active:bg-blue-700"
                 >
-                  Order
+                  Proceed to Shipment
                 </Link>
               </>
             )}
