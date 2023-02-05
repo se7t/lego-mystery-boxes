@@ -47,6 +47,7 @@ const Home = () => {
                       name={minifig.name}
                       setUrl={minifig.set_url}
                       setId={minifig.set_num}
+                      index={index + 1}
                     />
                   ))}
                 </div>

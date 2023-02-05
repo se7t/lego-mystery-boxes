@@ -4,21 +4,29 @@ import Link from "next/link";
 import { useContext } from "react";
 
 interface MinifigCardType {
+  index: number;
   imageUrl: string;
   name: string;
   setUrl: string;
   setId: string;
 }
 
-function MinifigCard({ imageUrl, name, setUrl, setId }: MinifigCardType) {
+function MinifigCard({
+  index,
+  imageUrl,
+  name,
+  setUrl,
+  setId,
+}: MinifigCardType) {
   const { chosenMinifigId, chooseMinifig } = useContext(MinifigContext);
 
   return (
     <div
-      className={`flex flex-col items-center justify-between gap-8 rounded-lg bg-gray-50 p-8 shadow-lg transition-shadow ${
+      className={`flex cursor-pointer flex-col items-center justify-between gap-8 rounded-lg bg-gray-50 p-8 shadow-lg transition-shadow ${
         setId === chosenMinifigId ? "shadow-lg shadow-amber-400" : ""
       }`}
       onClick={() => chooseMinifig(setId)}
+      tabIndex={index}
     >
       <Image
         src={imageUrl}
@@ -33,7 +41,7 @@ function MinifigCard({ imageUrl, name, setUrl, setId }: MinifigCardType) {
         href={setUrl}
         target="_blank"
         rel="noreferrer noopener nofollow"
-        className="text-center font-bold text-amber-400"
+        className="text-center font-bold text-amber-400 hover:text-amber-500 hover:underline"
       >
         Show Details
       </Link>
