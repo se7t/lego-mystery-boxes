@@ -38,7 +38,7 @@ const Form = () => {
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     axios({
       method: "post",
-      url: "http://httpbin.org/post",
+      url: "https://httpbin.org/post",
       data: data,
       headers: { "Content-Type": "multipart/form-data" },
     })
