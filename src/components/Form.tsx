@@ -181,7 +181,7 @@ const Form = () => {
             Address
           </label>
           <input
-            placeholder="308 Negra Aroya Lane"
+            placeholder="308 Negra Arroyo Lane"
             {...register("address", {
               required: "This field is required.",
               pattern: {
