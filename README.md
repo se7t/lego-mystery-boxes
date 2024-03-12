@@ -27,17 +27,23 @@ A Lego Minifig Mystery Boxes web app which allows users to generate and choose a
 
     [`https://tailwindcss.com/`](`https://tailwindcss.com/`)
 
-1.  **Axios**
+1.  **shadcn/ui**
 
-    "A promise based HTTP client for the browser and node.js. Axios provides a simple to use library in a small package with a very extensible interface."
+    "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source."
 
-    [`https://axios-http.com/`](`https://axios-http.com/`)
+    [`https://ui.shadcn.com/`](`https://ui.shadcn.com/`)
 
 1.  **react-hook-form**
 
     "Performant, flexible and extensible forms with easy-to-use validation."
 
     [`https://react-hook-form.com/`](`https://react-hook-form.com/`)
+
+1.  **zod**
+
+    "TypeScript-first schema validation with static type inference."
+
+    [`https://zod.dev/`](`https://zod.dev/`)
 
 1.  **Rebrickable API**
 
@@ -59,24 +65,24 @@ Clone the Lego Minifigs Mystery Boxes repository.
 $ git clone https://github.com/se7t/lego-mystery-boxes.git
 ```
 
-Use the package manager [yarn](https://yarnpkg.com/getting-started/install) to install Lego Minifigs Mystery Boxes.
+Use the package manager [pnpm](https://pnpm.io/installation) to install Lego Minifigs Mystery Boxes.
 
 ```bash
-$ yarn install
+$ pnpm install
 ```
 
 Create a `.env.local` file in root directory with the following content:
 
 ```env
-NEXT_PUBLIC_REBRICKABLE_API_KEY=
+REBRICKABLE_API_KEY=
 ```
 
 ## 🧰 Usage
 
-Use the package manager [yarn](https://yarnpkg.com/getting-started/install) to start the development server.
+Use the package manager [pnpm](https://pnpm.io/installation) to start the development server.
 
 ```bash
-$ yarn run dev
+$ pnpm dev
 ```
 
 ## 📓 Additional notes
